@@ -1,0 +1,14 @@
+{
+	"CFBundleInfoDictionaryVersion": "6.0",
+	"CFBundleIdentifier": "org.xoria.DrawingBenchmark",
+	"CFBundlePackageType": "APPL",
+	"CFBundleExecutable": "Drawing Benchmark",
+
+	"CFBundleName": "Drawing Benchmark",
+	"CFBundleDisplayName": "Drawing Benchmark",
+
+	"CFBundleDevelopmentRegion": "en",
+	"CFBundleShortVersionString": "1.0.0",
+	"CFBundleVersion": "1.0.0",
+	"NSHumanReadableCopyright": "Copyright © 2024 Luna Razzaghipour"
+}
