@@ -1,6 +1,3 @@
-@interface BenchmarkViewController : NSViewController
-@end
-
 @interface BenchmarkWindowController () <NSToolbarDelegate>
 @end
 
@@ -23,17 +20,24 @@ const NSToolbarItemIdentifier BenchmarkItemIdentifier = @"org.xoria.DrawingBench
 	                                              defer:YES];
 	self.window.title = @"Drawing Benchmark";
 
-	// I kept adding random stuff till centering worked ...
-	self.contentViewController = [[BenchmarkViewController alloc] init];
-	[self.window updateConstraintsIfNeeded];
-	[self.window layoutIfNeeded];
-	[self.window center];
-
+	self.contentViewController = [[NSViewController alloc] init];
 	[self.contentViewController addChildViewController:[[CGViewController alloc] init]];
 	[self.contentViewController addChildViewController:[[MetalViewController alloc] init]];
 
 	_selectedViewController = self.contentViewController.childViewControllers[0];
 	[self.contentViewController.view addSubview:_selectedViewController.view];
+	NSView *view = self.contentViewController.view;
+	NSView *subview = _selectedViewController.view;
+	subview.translatesAutoresizingMaskIntoConstraints = NO;
+	[NSLayoutConstraint activateConstraints:@[
+		[subview.topAnchor constraintEqualToAnchor:view.topAnchor],
+		[subview.bottomAnchor constraintEqualToAnchor:view.bottomAnchor],
+		[subview.leadingAnchor constraintEqualToAnchor:view.leadingAnchor],
+		[subview.trailingAnchor constraintEqualToAnchor:view.trailingAnchor],
+	]];
+
+	[self.window setFrame:(NSRect) { {0, 0}, {1000, 800} } display:YES];
+	[self.window center];
 
 	NSToolbar *toolbar =
 	        [[NSToolbar alloc] initWithIdentifier:@"org.xoria.DrawingBenchmark.BenchmarkWindowControllerToolbar"];
@@ -84,14 +88,16 @@ const NSToolbarItemIdentifier BenchmarkItemIdentifier = @"org.xoria.DrawingBench
 	                                       completionHandler:nil];
 
 	_selectedViewController = newSelectedViewController;
-}
 
-@end
-
-@implementation BenchmarkViewController
-
-- (NSSize)preferredContentSize {
-	return (NSSize){1000, 800};
+	NSView *view = self.contentViewController.view;
+	NSView *subview = _selectedViewController.view;
+	subview.translatesAutoresizingMaskIntoConstraints = NO;
+	[NSLayoutConstraint activateConstraints:@[
+		[subview.topAnchor constraintEqualToAnchor:view.topAnchor],
+		[subview.bottomAnchor constraintEqualToAnchor:view.bottomAnchor],
+		[subview.leadingAnchor constraintEqualToAnchor:view.leadingAnchor],
+		[subview.trailingAnchor constraintEqualToAnchor:view.trailingAnchor],
+	]];
 }
 
 @end
