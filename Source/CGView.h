@@ -1,0 +1,2 @@
+@interface CGView : NSView
+@end

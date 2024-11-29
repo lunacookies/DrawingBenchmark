@@ -1,0 +1,2 @@
+@interface MetalViewController : NSViewController
+@end

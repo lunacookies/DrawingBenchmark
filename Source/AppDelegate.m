@@ -1,4 +1,6 @@
-@implementation AppDelegate
+@implementation AppDelegate {
+	BenchmarkWindowController *_benchmarkWindowController;
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification {
 	NSString *displayName = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
@@ -102,6 +104,8 @@
 
 	NSApp.mainMenu = mainMenu;
 
+	_benchmarkWindowController = [[BenchmarkWindowController alloc] init];
+	[_benchmarkWindowController showWindow:nil];
 	[NSApp activate];
 }
 

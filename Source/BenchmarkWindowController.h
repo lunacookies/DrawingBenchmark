@@ -1,0 +1,2 @@
+@interface BenchmarkWindowController : NSWindowController
+@end

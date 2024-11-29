@@ -1,0 +1,2 @@
+@interface CGViewController : NSViewController
+@end
