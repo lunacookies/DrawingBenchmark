@@ -45,15 +45,16 @@
 }
 
 - (CTFrameRef)cachedCTFrame {
-	CFAutorelease(_cachedCTFrame);
 	return _cachedCTFrame;
 }
 
 - (void)setCachedCTFrame:(CTFrameRef)ctFrame {
 	if (_cachedCTFrame != NULL) {
-		CFRelease(_cachedCTFrame);
+		CFAutorelease(_cachedCTFrame);
 	}
-	CFRetain(ctFrame);
+	if (ctFrame != NULL) {
+		CFRetain(ctFrame);
+	}
 	_cachedCTFrame = ctFrame;
 }
 
