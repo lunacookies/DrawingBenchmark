@@ -9,6 +9,8 @@ mkdir -p "Build/Drawing Benchmark.app/Contents"
 mkdir -p "Build/Drawing Benchmark.app/Contents/MacOS"
 mkdir -p "Build/Drawing Benchmark.app/Contents/Resources/en.lproj"
 
+cat Source/*.h Source/*.m > "Build/Drawing Benchmark.app/Contents/Resources/Text.txt"
+
 plutil \
 	-convert binary1 \
 	-o "Build/Drawing Benchmark.app/Contents/Info.plist" \

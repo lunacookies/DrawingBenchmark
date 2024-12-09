@@ -15,12 +15,14 @@
 - (void)layout {
 	[super layout];
 
-	NSAttributedString *attributedString =
-	        [[NSAttributedString alloc] initWithString:@"Lorem ipsum dolor sit amet"
-	                                        attributes:@{
-		                                        NSFontAttributeName : [NSFont systemFontOfSize:NSFont.systemFontSize],
-		                                        NSForegroundColorAttributeName : NSColor.textColor,
-	                                        }];
+	NSURL *url = [NSBundle.mainBundle URLForResource:@"Text" withExtension:@"txt"];
+	NSString *string = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+	NSAttributedString *attributedString = [[NSAttributedString alloc]
+	        initWithString:string
+	            attributes:@{
+		            NSFontAttributeName : [NSFont monospacedSystemFontOfSize:12 weight:NSFontWeightRegular],
+		            NSForegroundColorAttributeName : NSColor.textColor,
+	            }];
 
 	CTFramesetterRef framesetter =
 	        CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
