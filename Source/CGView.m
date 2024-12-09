@@ -1,9 +1,15 @@
 @interface CGView ()
 @property(nonatomic) CTFrameRef cachedCTFrame;
+@property(nonatomic) CGFloat scrollOffset;
 @end
 
 @implementation CGView {
 	CTFrameRef _cachedCTFrame;
+}
+
+- (void)scrollWheel:(NSEvent *)event {
+	self.scrollOffset -= event.scrollingDeltaY;
+	self.needsDisplay = YES;
 }
 
 - (void)layout {
@@ -39,9 +45,13 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
+	NSGraphicsContext *context = NSGraphicsContext.currentContext;
+	[context saveGraphicsState];
 	[NSColor.textBackgroundColor set];
-	NSRectFill(dirtyRect);
+	NSRectFill(self.bounds);
+	CGContextTranslateCTM(context.CGContext, 0, self.scrollOffset);
 	CTFrameDraw(self.cachedCTFrame, NSGraphicsContext.currentContext.CGContext);
+	[context restoreGraphicsState];
 }
 
 - (CTFrameRef)cachedCTFrame {
